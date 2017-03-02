@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+	
+//		//首先，找出需要对比的中间的元素
+//		function quickSort(ary){
+//			if(ary.length<=1){
+//				return ary;
+//			}
+//			var middleValue= ary.splice(Math.floor(ary.length/2),1)[0];
+//			var left=[];
+//		 	var right=[];	
+//			for (var i = 0;i<ary.length;i++){
+//				var cur = ary[i];
+//				cur < middleValue ? left.push(cur):right.push(cur);
+//			}
+//				
+//			return quickSort(left).concat([middleValue],quickSort(right));
+//		}
+//		var ary=[12,13,23,14,20,26,34,13,16];
+//		var ray1=quickSort(ary);
+	
+	function insertSort(ary){
+		var newAry = [];
+		newAry.push(ary[0]);
+		for(var i=1;i<ary.length;i++){
+			var cur = ary[i];
+			for(var j=newAry.length-1;j>=0;){
+				if(cur<newAry[j]){
+					j--;
+					if(j===-1){
+						newAry.unshift(cur);
+					}
+				}else{
+					newAry.splice(j+1,0,cur);
+					j=-1;
+				}
+			}
+		}
+		return newAry;
+	}
+	var ary = [6,3,5,7,2,4];
+	var res = insertSort(ary);
+	console.log(res);
+	</script>
+</html>
