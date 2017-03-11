@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #box {
+            width: 500px;
+            border: 1px solid palegreen;
+            border-collapse: collapse;
+            /*border-radius: 10px;圆角*/
+            box-shadow: 0 0 10px 2px rgba(173, 255, 198, 0.5); /*第一个 x轴的偏移量,第二个 y轴的偏移量 第三个 阴影的模糊度  第四个值 阴影的深度 第五个值 阴影的颜色*/
+            margin: 50px auto;
+        }
+
+        #box th {
+            background: palegreen;
+            color: #000;
+
+        }
+
+        #box th, #box td {
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid palegreen;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+<table id="box" width="100%">
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>武力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--<tr>
+        <td>111</td>
+        <td>222</td>
+        <td>333</td>
+        <td>4444</td>
+    </tr>-->
+    </tbody>
+
+</table>
+</body>
+</html>
+<script>
+var utils={
+    listToArray:function(likeArray){
+        var ary = [];
+        try{
+            ary=Array.prototype.slice.call(likeArray,0);
+        }catch(e){
+            for (var i = 0; i < likeArray.length; i++) {
+                ary[ary.length]=likeArray[i];
+            };
+        }
+        return ary;
+    } ,
+    jsonParse:function(str){
+        return 'JSON' in window? JSON.parse(str):eval('('+str+')');
+    }
+   
+}
+    //1.获取元素
+   var oTable = document.getElementById("box");
+   var tHead = oTable.tHead;
+   var tCells = tHead.rows[0].cells;
+   var tBody = oTable.tBodies[0];
+   var aRows = tBody.rows;
+   var data = null;
+
+
+    //2.获得数据
+    getData();
+    function getData(){
+        var xhr = new XMLHttpRequest;
+        xhr.open('get','data.txt',false);
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState===4&&/^2\d{2}$/.test(xhr.status)){
+                data=utils.jsonParse(xhr.responseText)
+            }
+        };
+        xhr.send(null); 
+    }
+    
+ 
+    //3.绑定数据
+  
+
+    //4.表格排序
+        
+
+    //5.实现升降序排列
+
+
+</script>
